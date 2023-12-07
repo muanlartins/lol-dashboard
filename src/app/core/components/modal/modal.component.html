@@ -1,0 +1,49 @@
+<div class="modal" *ngIf="open">
+  <p class="modal__title">
+    {{ tracker[championId].champion.name }}
+  </p>
+  <img
+    src="../../../../assets/images/close.png"
+    class="modal__close"
+    (click)="closeModal()"
+  />
+  <img
+    class="modal__background"
+    [src]="tracker[championId].champion.skins[0].uncenteredSplash"
+  />
+  <div class="modal__overlay"></div>
+  <div class="modal__divisor"></div>
+  <div class="modal__unlocked">
+    <div class="modal__unlocked__skin" *ngFor="let skin of unlocked">
+      <div class="modal__unlocked__skin__portrait">
+        <img
+          class="modal__unlocked__skin__portrait__image"
+          [src]="skin.loadScreen"
+        />
+        <img
+          class="modal__unlocked__skin__portrait__border"
+          src="../../../../assets/images/border.png"
+        />
+        <div class="modal__unlocked__skin__portrait__overlay"></div>
+      </div>
+      <p class="modal__unlocked__skin__name">{{ skin.name }}</p>
+    </div>
+  </div>
+  <div class="modal__unlockable">
+    <div class="modal__unlockable__skin" *ngFor="let skin of unlockable">
+      <div class="modal__unlockable__skin__portrait">
+        <img
+          class="modal__unlockable__skin__portrait__image"
+          [src]="skin.loadScreen"
+        />
+        <img
+          class="modal__unlockable__skin__portrait__border"
+          src="../../../../assets/images/border.png"
+        />
+        <div class="modal__unlockable__skin__portrait__overlay"></div>
+      </div>
+      <p class="modal__unlockable__skin__name">{{ skin.name }}</p>
+    </div>
+  </div>
+</div>
+<div class="background" *ngIf="open" (click)="closeModal()"></div>

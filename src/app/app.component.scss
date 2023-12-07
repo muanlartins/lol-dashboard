@@ -1,0 +1,61 @@
+:host {
+  --blue-1: #CDFAFA;
+  --blue-2: #0AC8B9;
+  --blue-3: #0397AB;
+  --blue-4: #005A82;
+  --blue-5: #0A323C;
+  --blue-6: #091428;
+  --blue-7: #0A1428;
+  --blue-8: #020B0F;
+  --blue-gradient-1: linear-gradient(#09142800, #010A13 70%);
+  --blue-gradient-2: linear-gradient(#091428, #010A13 70%);
+  --blue-gradient-3: linear-gradient(to right, #020B0F 10%, #020b0fcc, #020B0F 90%);
+
+  --gold-1: #F0E6D2;
+  --gold-2: #C8AA6E;
+  --gold-3: #C8AA6E;
+  --gold-4: #C89B3C;
+  --gold-5: #785A28;
+  --gold-6: #463714;
+  --gold-7: #32281E;
+  --gold-gradient: linear-gradient(#C89B3C, #785A28);
+  --gold-4-filter: brightness(0) saturate(100%) invert(67%) sepia(12%) saturate(2148%) hue-rotate(3deg) brightness(94%) contrast(82%);
+  --gold-1-filter: brightness(0) saturate(100%) invert(82%) sepia(26%) saturate(155%) hue-rotate(355deg) brightness(112%) contrast(88%);
+
+  --grey-1: #A09B8C;
+  --grey-1-5: #5B5A56;
+  --grey-2: #3C3C41;
+  --grey-3: #1E2328;
+  --grey-cool: #1E282D;
+  --hextech-black: #010A13;
+}
+
+@font-face {
+  font-family: 'Beautfort';
+  src: url('../assets/fonts/BeaufortForLoL-TTF/BeaufortforLOL-Light.ttf') format('truetype');
+  font-weight: light;
+}
+
+@font-face {
+  font-family: 'Beautfort';
+  src: url('../assets/fonts/BeaufortForLoL-TTF/BeaufortforLOL-Regular.ttf') format('truetype');
+  font-weight: regular;
+}
+
+@font-face {
+  font-family: 'Beautfort';
+  src: url('../assets/fonts/BeaufortForLoL-TTF/BeaufortforLOL-Bold.ttf') format('truetype');
+  font-weight: bold;
+}
+
+@font-face {
+  font-family: 'Spiegel';
+  src: url('../assets/fonts/Spiegel-TTF/Spiegel_TT_Regular.ttf') format('truetype');
+  font-weight: regular;
+}
+
+@font-face {
+  font-family: 'Spiegel';
+  src: url('../assets/fonts/Spiegel-TTF/Spiegel_TT_Bold.ttf') format('truetype');
+  font-weight: bold;
+}

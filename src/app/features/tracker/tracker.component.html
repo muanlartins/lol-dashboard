@@ -1,0 +1,194 @@
+<div class="tracker">
+  <header class="tracker__header" *ngIf="!loading">
+    <p class="tracker__header__displayName">
+      {{ summoner.displayName }}
+    </p>
+    <p class="tracker__header__gameName">
+      {{ summoner.gameName }}#{{ summoner.tagLine }}
+    </p>
+    <video
+      class="tracker__header__background"
+      autoplay
+      muted
+      loop
+      src="../../../assets/videos/background.mp4"
+    ></video>
+  </header>
+
+  <form [formGroup]="form" class="tracker__filters" *ngIf="!loading">
+    <div class="tracker__filters__name">
+      <input
+        type="text"
+        formControlName="name"
+        class="tracker__filters__name__input"
+        placeholder="Search for a champion"
+      />
+      <img
+        class="tracker__filters__name__search"
+        src="../../../assets/images/search.png"
+      />
+    </div>
+    <div class="tracker__filters__unlockable">
+      <input
+        type="checkbox"
+        formControlName="unlockable"
+        class="tracker__filters__unlockable__input"
+      />
+      <div class="tracker__filters__unlockable__overlay"></div>
+      <p class="tracker__filters__unlockable__text">Unlockable</p>
+    </div>
+    <div class="tracker__filters__no-skins">
+      <input
+        type="checkbox"
+        formControlName="noSkins"
+        class="tracker__filters__no-skins__input"
+      />
+      <div class="tracker__filters__no-skins__overlay"></div>
+      <p class="tracker__filters__no-skins__text">No Skins</p>
+    </div>
+    <div class="tracker__filters__no-mastery">
+      <input
+        type="checkbox"
+        formControlName="noMastery"
+        class="tracker__filters__no-mastery__input"
+      />
+      <div class="tracker__filters__no-mastery__overlay"></div>
+      <p class="tracker__filters__no-mastery__text">No Mastery</p>
+    </div>
+  </form>
+
+  <div class="tracker__champions" *ngIf="!loading">
+    <div
+      class="tracker__champions__champion"
+      *ngFor="let championId of filteredChampionIds"
+      (click)="openModal(championId)"
+    >
+      <img
+        class="tracker__champions__champion__image"
+        [src]="tracker[championId].champion.baseLoadScreen"
+      />
+      <img
+        *ngIf="
+          !(
+            tracker[championId].unlockable.length &&
+            tracker[championId].skinCount === 0
+          )
+        "
+        class="tracker__champions__champion__border"
+        src="../../../assets/images/border.png"
+      />
+      <img
+        *ngIf="
+          tracker[championId].unlockable.length &&
+          tracker[championId].skinCount === 0
+        "
+        class="tracker__champions__champion__border tracker__champions__champion__border--challenger"
+        src="../../../assets/images/challenger.png"
+      />
+      <div class="tracker__champions__champion__overlay"></div>
+      <div class="tracker__champions__champion__divisor"></div>
+      <img
+        class="tracker__champions__champion__skin"
+        src="../../../assets/images/skin.png"
+      />
+      <img
+        class="tracker__champions__champion__skin-shard"
+        src="../../../assets/images/skin_shard.png"
+      />
+      <div
+        class="tracker__champions__champion__overlay tracker__champions__champion__overlay--hover"
+      ></div>
+      <p class="tracker__champions__champion__name">
+        {{ tracker[championId].champion.name }}
+      </p>
+      <p class="tracker__champions__champion__title">
+        {{ tracker[championId].champion.title }}
+      </p>
+      <div
+        class="tracker__champions__champion__skin-preview tracker__champions__champion__skin-preview--unlocked"
+      >
+        <div
+          *ngFor="
+            let skin of getChampionUnlockedSkins(championId);
+            index as index
+          "
+          class="tracker__champions__champion__skin-preview__skin tracker__champions__champion__skin-preview__skin--unlocked"
+        >
+          <img
+            class="tracker__champions__champion__skin-preview__skin__tile"
+            [src]="skin.tile"
+          />
+          <div
+            class="tracker__champions__champion__skin-preview__skin__overlay"
+          ></div>
+          <div
+            class="tracker__champions__champion__skin-preview__skin__border"
+          ></div>
+        </div>
+        <img
+          class="tracker__champions__champion__skin-preview__plus"
+          src="../../../assets/images/close.png"
+          *ngIf="tracker[championId].skinCount > 3"
+        />
+      </div>
+
+      <div
+        class="tracker__champions__champion__skin-preview tracker__champions__champion__skin-preview--unlockable"
+      >
+        <div
+          *ngFor="
+            let skin of getChampionUnlockableSkins(championId);
+            index as index
+          "
+          class="tracker__champions__champion__skin-preview__skin tracker__champions__champion__skin-preview__skin--unlockable"
+        >
+          <img
+            class="tracker__champions__champion__skin-preview__skin__tile"
+            [src]="skin.tile"
+          />
+          <div
+            class="tracker__champions__champion__skin-preview__skin__overlay"
+          ></div>
+        </div>
+      </div>
+      <div class="tracker__champions__champion__skins">
+        <div class="tracker__champions__champion__skins__property">
+          <img
+            class="tracker__champions__champion__skins__property__image tracker__champions__champion__skins__property__image--filter"
+            src="../../../assets/images/skin.png"
+          />
+          <p class="tracker__champions__champion__skins__property__number">
+            {{ tracker[championId].skinCount }}
+          </p>
+        </div>
+        <div class="tracker__champions__champion__skins__property">
+          <img
+            class="tracker__champions__champion__skins__property__image"
+            src="../../../assets/images/skin_shard.png"
+          />
+          <p class="tracker__champions__champion__skins__property__number">
+            {{ tracker[championId].unlockable.length }}
+          </p>
+        </div>
+        <div class="tracker__champions__champion__skins__property">
+          <img
+            class="tracker__champions__champion__skins__property__image"
+            src="../../../assets/images/mastery.png"
+          />
+          <p class="tracker__champions__champion__skins__property__number">
+            {{ tracker[championId].unlockable.length }}
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <video
+    *ngIf="loading"
+    class="tracker__loading"
+    autoplay
+    muted
+    loop
+    src="../../../assets/videos/loading.mp4"
+  ></video>
+</div>

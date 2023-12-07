@@ -1,0 +1,3 @@
+<app-tracker *ngIf="auth"></app-tracker>
+<app-modal *ngIf="auth"></app-modal>
+<input *ngIf="!auth" type="file" (change)="fileChanged($event)" />
