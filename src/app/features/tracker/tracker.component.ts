@@ -75,7 +75,6 @@ export class TrackerComponent {
         skinCount: 0,
         unlockable: [] as string[],
         champion: {} as Champion,
-        mastery: {} as Mastery,
       };
     });
 
@@ -121,7 +120,7 @@ export class TrackerComponent {
         }
       });
 
-      this.getMasteries(this.summoner.summonerId);
+      this.getMasteries(this.summoner.puuid);
     });
   }
 
@@ -173,6 +172,10 @@ export class TrackerComponent {
   }
 
   public applyFilter() {
+    this.championIds.forEach((championId) =>
+      console.log(this.tracker[championId].mastery),
+    );
+
     this.filteredChampionIds = this.championIds
       .filter((championId: string) =>
         this.tracker[championId] &&
@@ -193,7 +196,7 @@ export class TrackerComponent {
       )
       .filter((championId: string) =>
         this.filter.noMastery
-          ? this.tracker[championId].mastery.championPointsUntilNextLevel !== 0
+          ? this.tracker[championId].mastery === undefined
           : true,
       );
   }
@@ -236,9 +239,9 @@ export class TrackerComponent {
     });
   }
 
-  public getMasteries(summonerId: number) {
+  public getMasteries(puuid: string) {
     return this.lcuService
-      .getMasteries(summonerId)
+      .getMasteries(puuid)
       .subscribe((masteries: Mastery[]) => {
         masteries.forEach((mastery: Mastery) => {
           this.tracker[mastery.championId].mastery = mastery;

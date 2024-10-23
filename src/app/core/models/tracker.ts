@@ -7,6 +7,6 @@ export interface Tracker {
     skinCount: number;
     unlockable: string[];
     champion: Champion;
-    mastery: Mastery;
+    mastery?: Mastery;
   };
 }

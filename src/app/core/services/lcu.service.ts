@@ -43,9 +43,9 @@ export class LcuService {
     return this.http.get<Loot[]>(`${this.baseUrl}/loots`);
   }
 
-  public getMasteries(summonerId: number): Observable<Mastery[]> {
+  public getMasteries(puuid: string): Observable<Mastery[]> {
     return this.http.get<Mastery[]>(
-      `${this.baseUrl}/summoner/${summonerId}/masteries`,
+      `${this.baseUrl}/summoner/${puuid}/masteries`,
     );
   }
 }
